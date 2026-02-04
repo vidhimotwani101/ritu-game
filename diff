@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Ritu 💙</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+  margin:0;
+  font-family:'Patrick Hand',cursive;
+  background:linear-gradient(135deg,#ffe0ec,#dbefff);
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+.container{
+  background:white;
+  padding:32px;
+  border-radius:26px;
+  width:340px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,0.18);
+  position:relative;
+}
+
+/* Screens */
+
+.screen{
+  display:none;
+}
+
+#giftScreen{
+  display:block;
+}
+
+/* Gift */
+
+#gift{
+  font-size:88px;
+  cursor:pointer;
+  animation:bounce 1.5s infinite;
+}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-12px);}
+}
+
+.open-text{
+  margin-top:12px;
+  color:#555;
+  font-size:15px;
+}
+
+/* Titles */
+
+h2{
+  font-family:'Pacifico',cursive;
+  color:#ff3b7d;
+  font-size:26px;
+  margin-bottom:10px;
+}
+
+p{
+  font-size:17px;
+  margin:8px 0;
+  line-height:1.4;
+}
+
+/* Quest */
+
+.checklist{
+  text-align:left;
+  margin:15px auto;
+  width:90%;
+  font-size:17px;
+}
+
+.checklist label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:6px 0;
+  cursor:pointer;
+}
+
+.checklist input{
+  accent-color:#ff3b7d;
+  transform:scale(1.1);
+}
+
+#nextQuest{
+  margin-top:15px;
+  padding:8px 22px;
+  border:none;
+  border-radius:20px;
+  background:#ff3b7d;
+  color:white;
+  font-size:15px;
+  cursor:pointer;
+}
+
+/* Buttons */
+
+.buttons{
+  margin-top:20px;
+  height:70px;
+  position:relative;
+}
+
+button{
+  padding:9px 24px;
+  border:none;
+  border-radius:22px;
+  font-size:15px;
+  cursor:pointer;
+  transition:0.2s;
+  font-family:'Patrick Hand',cursive;
+}
+
+#yes{
+  background:#ff3b7d;
+  color:white;
+}
+
+#yes:hover{
+  transform:scale(1.05);
+}
+
+#no{
+  background:#aaa;
+  color:white;
+  position:absolute;
+}
+
+/* Cat */
+
+.cat{
+  width:85px;
+  margin:10px auto;
+}
+
+/* Surprise */
+
+#surprise{
+  font-size:22px;
+  font-weight:600;
+  color:#ff3b7d;
+  display:none;
+  margin-top:8px;
+}
+
+/* Kisses */
+
+.kiss{
+  position:fixed;
+  font-size:22px;
+  animation:floatUp 4s linear forwards;
+  opacity:0.8;
+}
+
+@keyframes floatUp{
+  from{
+    transform:translateY(100vh);
+    opacity:1;
+  }
+  to{
+    transform:translateY(-10vh);
+    opacity:0;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- 1 Gift -->
+
+<div id="giftScreen" class="screen">
+
+  <div id="gift">🎁</div>
+  <div class="open-text">Tap to open</div>
+
+</div>
+
+
+<!-- 2 Quest -->
+
+<div id="questScreen" class="screen">
+
+  <h2>Ritu Quest</h2>
+
+  <p>Select everything that is true:</p>
+
+  <div class="checklist">
+
+    <label><input type="checkbox"> Sweetest</label>
+    <label><input type="checkbox"> Kindest</label>
+    <label><input type="checkbox"> Loveliest</label>
+    <label><input type="checkbox"> Cutest</label>
+    <label><input type="checkbox"> Even when mad</label>
+    <label><input type="checkbox"> Sometimes annoying</label>
+    <label><input type="checkbox"> Still the best</label>
+    <label><input type="checkbox"> Loved in every mood</label>
+
+  </div>
+
+  <button id="nextQuest">Continue</button>
+
+  <div id="surprise">Answer: Ritu himself 💙</div>
+
+</div>
+
+
+<!-- 3 Sorry -->
+
+<div id="sorryScreen" class="screen">
+
+  <img 
+    src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" 
+    class="cat"
+  >
+
+  <h2>One more thing</h2>
+
+  <p>Will you forgive me?</p>
+
+  <div class="buttons">
+    <button id="yes">Yes</button>
+    <button id="no">No</button>
+  </div>
+
+</div>
+
+
+<!-- 4 Final -->
+
+<div id="finalScreen" class="screen">
+
+  <h2>You win</h2>
+
+  <p>You’re my favorite person.</p>
+
+  <p>
+    Thanks cute kitty.<br>
+    Come talk now :(
+  </p>
+
+  <p><b>— Yours truly</b></p>
+
+</div>
+
+</div>
+
+
+<script>
+
+// Screens
+const giftScreen = document.getElementById("giftScreen");
+const questScreen = document.getElementById("questScreen");
+const sorryScreen = document.getElementById("sorryScreen");
+const finalScreen = document.getElementById("finalScreen");
+
+// Buttons
+const gift = document.getElementById("gift");
+const nextQuest = document.getElementById("nextQuest");
+const surprise = document.getElementById("surprise");
+
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
+
+// Gift → Quest
+gift.addEventListener("click", ()=>{
+  giftScreen.style.display="none";
+  questScreen.style.display="block";
+});
+
+
+// Quest Validation
+nextQuest.addEventListener("click", ()=>{
+
+  const checks = document.querySelectorAll(".checklist input");
+  let allChecked = true;
+
+  checks.forEach(box=>{
+    if(!box.checked) allChecked = false;
+  });
+
+  if(!allChecked){
+    alert("Select all first 😏");
+    return;
+  }
+
+  surprise.style.display="block";
+
+  setTimeout(()=>{
+    questScreen.style.display="none";
+    sorryScreen.style.display="block";
+  },1300);
+
+});
+
+
+// Move No
+function moveNo(){
+
+  const x = Math.random()*240 -120;
+  const y = Math.random()*50;
+
+  noBtn.style.transform=`translate(${x}px,${y}px)`;
+
+  alert("Wrong answer 😌 Try again");
+}
+
+noBtn.addEventListener("mouseover",moveNo);
+noBtn.addEventListener("click",moveNo);
+
+
+// Yes → Final
+yesBtn.addEventListener("click", ()=>{
+  sorryScreen.style.display="none";
+  finalScreen.style.display="block";
+  startKisses();
+});
+
+
+// Kisses
+function startKisses(){
+
+  setInterval(()=>{
+
+    const kiss = document.createElement("div");
+    kiss.classList.add("kiss");
+
+    const emojis = ["💋","😘","💖"];
+    kiss.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+
+    kiss.style.left = Math.random()*100 + "vw";
+    kiss.style.fontSize = Math.random()*14 + 18 + "px";
+
+    document.body.appendChild(kiss);
+
+    setTimeout(()=>{
+      kiss.remove();
+    },4000);
+
+  },380);
+
+}
+
+</script>
+
+</body>
+</html>
