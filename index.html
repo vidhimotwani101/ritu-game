@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Ritu Quest 💖</title>
+<title>For Ritu 💗</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Pacifico&display=swap" rel="stylesheet">
 
@@ -11,12 +11,25 @@
 body{
   margin:0;
   font-family:'Patrick Hand',cursive;
-  background:linear-gradient(135deg,#ffd6e8,#ffeaf4);
+  background:linear-gradient(135deg,#ffc1e3,#ffd6f2);
   display:flex;
   justify-content:center;
   align-items:center;
   height:100vh;
   overflow:hidden;
+}
+
+/* Floating hearts */
+.emoji{
+  position:fixed;
+  font-size:22px;
+  animation:floatUp 6s linear infinite;
+  opacity:0.8;
+}
+
+@keyframes floatUp{
+  from{ transform:translateY(100vh); }
+  to{ transform:translateY(-10vh); }
 }
 
 .container{
@@ -25,7 +38,7 @@ body{
   padding:30px;
   border-radius:30px;
   text-align:center;
-  box-shadow:0 20px 60px rgba(0,0,0,0.15);
+  box-shadow:0 20px 60px rgba(255,0,150,0.2);
 }
 
 .screen{ display:none; }
@@ -33,7 +46,7 @@ body{
 
 h1{
   font-family:'Pacifico',cursive;
-  color:#ff2e7e;
+  color:#ff1493;
 }
 
 button{
@@ -48,7 +61,7 @@ button{
 }
 
 .yes{
-  background:#ff2e7e;
+  background:#ff1493;
   color:white;
 }
 
@@ -62,14 +75,15 @@ button:hover{
   transform:scale(1.08);
 }
 
-/* Final Screen Full */
+/* FINAL SCREEN */
+
 .finalScreen{
   position:fixed;
   top:0;
   left:0;
   width:100vw;
   height:100vh;
-  background:linear-gradient(135deg,#5c4f1a,#1a1608);
+  background:linear-gradient(135deg,#ff69b4,#ffb6e6);
   display:none;
   justify-content:center;
   align-items:center;
@@ -77,45 +91,59 @@ button:hover{
 }
 
 .glass{
-  background:rgba(255,255,255,0.15);
-  backdrop-filter:blur(20px);
+  background:rgba(255,255,255,0.3);
+  backdrop-filter:blur(18px);
   padding:40px;
   border-radius:30px;
   text-align:center;
-  color:white;
+  color:#8b005d;
   width:300px;
 }
 
 .gif{
-  width:120px;
+  width:130px;
   margin:15px 0;
+}
+
+.message{
+  font-size:18px;
+  margin-top:10px;
+}
+
+.signature{
+  margin-top:15px;
+  font-weight:600;
 }
 
 </style>
 </head>
 <body>
 
+<!-- Floating Emojis -->
+<div class="emoji" style="left:10%;">💖</div>
+<div class="emoji" style="left:30%; animation-delay:2s;">💗</div>
+<div class="emoji" style="left:50%; animation-delay:4s;">💘</div>
+<div class="emoji" style="left:70%; animation-delay:1s;">💞</div>
+<div class="emoji" style="left:85%; animation-delay:3s;">💕</div>
+
 <div class="container">
 
-<!-- Start -->
 <div id="startScreen" class="screen">
   <h1>Ritu Quest 💌</h1>
   <p>I made something special for you…</p>
   <button class="yes" onclick="goQuest()">See it</button>
 </div>
 
-<!-- Quest -->
 <div id="questScreen" class="screen">
-  <h1>Mini Ritu Quiz 😏</h1>
+  <h1>Mini Quiz 😏</h1>
   <p>Pick all correct answers:</p>
-  <label><input type="checkbox"> Ritu is cutest</label><br>
-  <label><input type="checkbox"> Ritu is dramatic</label><br>
-  <label><input type="checkbox"> Ritu is sweet</label><br>
+  <label><input type="checkbox"> Ritu cutest</label><br>
+  <label><input type="checkbox"> Ritu dramatic</label><br>
+  <label><input type="checkbox"> Ritu sweet</label><br>
   <label><input type="checkbox"> Ritu deserves apology</label><br><br>
   <button class="yes" onclick="checkQuiz()">Continue</button>
 </div>
 
-<!-- Forgive Screen -->
 <div id="forgiveScreen" class="screen">
   <h1>Forgive me? 🥺</h1>
   <p>I promise next time no drama.</p>
@@ -125,17 +153,15 @@ button:hover{
 
 </div>
 
-<!-- FINAL FULLSCREEN -->
+<!-- FINAL -->
 <div id="finalScreen" class="finalScreen">
   <div class="glass">
-    <h1>Raindance 🌧️</h1>
-    <img class="gif" src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
-    <p>Only me and you.</p>
-    <p>If it rains — we stay.<br>
-    If it hurts — we talk.<br>
-    If silence — we still choose each other.</p>
-    <p>Thank you for forgiving me 💖</p>
-    <p>— Vidhi</p>
+    <img class="gif" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
+    <div class="message">
+      u fine u my fav 💗<br>
+      thanks cato 🐱
+    </div>
+    <div class="signature">— Vidhi</div>
   </div>
 </div>
 
@@ -174,22 +200,9 @@ function finalYes(){
 
   const music=document.getElementById("bgMusic");
 
-  music.currentTime=70;  // start time
-  music.volume=0;
+  music.currentTime=70;
+  music.volume=1;   // force volume
   music.play();
-
-  // stop at 1:40
-  music.addEventListener("timeupdate",()=>{
-    if(music.currentTime>=100){
-      music.pause();
-    }
-  });
-
-  let fade=setInterval(()=>{
-    if(music.volume<0.9){
-      music.volume+=0.05;
-    } else clearInterval(fade);
-  },200);
 }
 
 </script>
