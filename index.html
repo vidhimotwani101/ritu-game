@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Ritu 💙</title>
+<title>Raindance 🌧️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Pacifico&display=swap" rel="stylesheet">
 
@@ -19,6 +19,8 @@ body{
   overflow:hidden;
 }
 
+/* Container */
+
 .container{
   background:white;
   padding:32px;
@@ -31,6 +33,8 @@ body{
 
 .screen{ display:none; }
 #giftScreen{ display:block; }
+
+/* Gift */
 
 #gift{
   font-size:88px;
@@ -49,6 +53,8 @@ body{
   font-size:15px;
 }
 
+/* Titles */
+
 h2{
   font-family:'Pacifico',cursive;
   color:#ff3b7d;
@@ -61,6 +67,8 @@ p{
   margin:8px 0;
   line-height:1.4;
 }
+
+/* Checklist */
 
 .checklist{
   text-align:left;
@@ -93,6 +101,8 @@ p{
   cursor:pointer;
 }
 
+/* Buttons */
+
 .buttons{
   margin-top:20px;
   height:70px;
@@ -109,7 +119,11 @@ button{
   font-family:'Patrick Hand',cursive;
 }
 
-#yes{ background:#ff3b7d; color:white; }
+#yes{
+  background:#ff3b7d;
+  color:white;
+}
+
 #yes:hover{ transform:scale(1.05); }
 
 #no{
@@ -118,42 +132,62 @@ button{
   position:absolute;
 }
 
-.cat{
-  width:85px;
-  margin:10px auto;
+/* FINAL SCREEN */
+
+.rain-bg{
+  background:linear-gradient(135deg,#5c4f1a,#1f1b0f);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100%;
+  width:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  animation:fadeInBg 1.5s ease forwards;
 }
 
-#surprise{
-  font-size:22px;
+@keyframes fadeInBg{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
+.glass-card{
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(15px);
+  padding:35px;
+  border-radius:28px;
+  text-align:center;
+  color:white;
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  animation:slideUp 1.2s ease forwards;
+}
+
+@keyframes slideUp{
+  from{transform:translateY(40px);opacity:0;}
+  to{transform:translateY(0);opacity:1;}
+}
+
+.final-title{
+  font-size:30px;
+  margin-bottom:12px;
+  color:#f5e7a1;
+}
+
+.final-line{
+  font-size:18px;
+  margin:10px 0;
+}
+
+.small{
+  font-size:15px;
+  opacity:0.85;
+}
+
+.signature{
+  margin-top:20px;
   font-weight:600;
-  color:#ff3b7d;
-  display:none;
-  margin-top:8px;
-}
-
-.kiss{
-  position:fixed;
-  font-size:22px;
-  animation:floatUp 4s linear forwards;
-  opacity:0.8;
-}
-
-@keyframes floatUp{
-  from{ transform:translateY(100vh); opacity:1; }
-  to{ transform:translateY(-10vh); opacity:0; }
-}
-
-/* NEW Dancing Cat */
-#danceCat{
-  width:120px;
-  display:none;
-  margin-top:15px;
-  animation:popIn 0.6s ease forwards;
-}
-
-@keyframes popIn{
-  from{ transform:scale(0); opacity:0; }
-  to{ transform:scale(1); opacity:1; }
+  opacity:0.9;
 }
 
 </style>
@@ -182,11 +216,9 @@ button{
     <label><input type="checkbox"> Loved in every mood</label>
   </div>
   <button id="nextQuest">Continue</button>
-  <div id="surprise">Answer: Ritu himself 💙</div>
 </div>
 
 <div id="sorryScreen" class="screen">
-  <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" class="cat">
   <h2>One more thing</h2>
   <p>Will you forgive me?</p>
   <div class="buttons">
@@ -195,23 +227,22 @@ button{
   </div>
 </div>
 
-<div id="finalScreen" class="screen">
-  <h2>You win</h2>
-  <p>You’re my favorite person.</p>
-  <p>Thanks cute kitty.<br>Come talk now :(</p>
-  <p><b>— Yours truly</b></p>
-
-  <!-- Dancing Cat -->
-  <img id="danceCat"
-       src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
+<div id="finalScreen" class="screen rain-bg">
+  <div class="glass-card">
+    <h2 class="final-title">Raindance 🌧️</h2>
+    <p class="final-line">Only me and you.</p>
+    <p class="final-line small">
+      If it rains — we stay.<br>
+      If it hurts — we talk.<br>
+      If it’s silence — we choose each other anyway.
+    </p>
+    <p class="signature">— Vidhi</p>
+  </div>
 </div>
 
 </div>
 
-<!-- Music -->
-<audio id="endMusic"
-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
-</audio>
+<audio id="rainMusic" src="raindance.mp3"></audio>
 
 <script>
 
@@ -222,8 +253,6 @@ const finalScreen=document.getElementById("finalScreen");
 
 const gift=document.getElementById("gift");
 const nextQuest=document.getElementById("nextQuest");
-const surprise=document.getElementById("surprise");
-
 const yesBtn=document.getElementById("yes");
 const noBtn=document.getElementById("no");
 
@@ -237,19 +266,14 @@ nextQuest.addEventListener("click",()=>{
   let allChecked=true;
   checks.forEach(box=>{ if(!box.checked) allChecked=false; });
   if(!allChecked){ alert("Select all first 😏"); return; }
-
-  surprise.style.display="block";
-  setTimeout(()=>{
-    questScreen.style.display="none";
-    sorryScreen.style.display="block";
-  },1300);
+  questScreen.style.display="none";
+  sorryScreen.style.display="block";
 });
 
 function moveNo(){
   const x=Math.random()*240-120;
   const y=Math.random()*50;
   noBtn.style.transform=`translate(${x}px,${y}px)`;
-  alert("Wrong answer 😌 Try again");
 }
 
 noBtn.addEventListener("mouseover",moveNo);
@@ -257,26 +281,20 @@ noBtn.addEventListener("click",moveNo);
 
 yesBtn.addEventListener("click",()=>{
   sorryScreen.style.display="none";
-  finalScreen.style.display="block";
+  finalScreen.style.display="flex";
 
-  document.getElementById("endMusic").play();
-  document.getElementById("danceCat").style.display="block";
+  const music=document.getElementById("rainMusic");
+  music.volume=0;
+  music.play();
 
-  startKisses();
+  let fade=setInterval(()=>{
+    if(music.volume<0.9){
+      music.volume+=0.05;
+    } else {
+      clearInterval(fade);
+    }
+  },200);
 });
-
-function startKisses(){
-  setInterval(()=>{
-    const kiss=document.createElement("div");
-    kiss.classList.add("kiss");
-    const emojis=["💋","😘","💖"];
-    kiss.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
-    kiss.style.left=Math.random()*100+"vw";
-    kiss.style.fontSize=Math.random()*14+18+"px";
-    document.body.appendChild(kiss);
-    setTimeout(()=>{ kiss.remove(); },4000);
-  },380);
-}
 
 </script>
 
