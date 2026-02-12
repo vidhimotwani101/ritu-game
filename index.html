@@ -137,29 +137,30 @@ button{
   position:absolute;
 }
 
-/* FINAL SCREEN */
+/* FINAL FULLSCREEN RAIN SCREEN */
 
 .rain-bg{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
   background:linear-gradient(135deg,#5c4f1a,#1a1608);
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100%;
-  width:100%;
-  position:absolute;
-  top:0;
-  left:0;
+  z-index:999;
+  animation:fadeIn 1s ease forwards;
 }
 
 .glass-card{
-  background:rgba(255,255,255,0.1);
-  backdrop-filter:blur(18px);
-  padding:40px;
-  border-radius:30px;
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(20px);
+  padding:45px;
+  border-radius:32px;
   text-align:center;
   color:white;
   box-shadow:0 30px 70px rgba(0,0,0,0.6);
-  animation:fadeIn 1s ease forwards;
 }
 
 .final-title{
@@ -188,7 +189,7 @@ button{
 
 <body>
 
-<div class="container">
+<div class="container" id="mainContainer">
 
 <div id="giftScreen" class="screen">
   <div id="gift">🎁</div>
@@ -220,6 +221,9 @@ button{
   </div>
 </div>
 
+</div>
+
+<!-- FINAL SCREEN -->
 <div id="finalScreen" class="screen rain-bg">
   <div class="glass-card">
     <h2 class="final-title">Raindance 🌧️</h2>
@@ -233,8 +237,6 @@ button{
   </div>
 </div>
 
-</div>
-
 <audio id="rainMusic" src="raindance.mp3"></audio>
 
 <script>
@@ -243,25 +245,28 @@ const giftScreen=document.getElementById("giftScreen");
 const questScreen=document.getElementById("questScreen");
 const sorryScreen=document.getElementById("sorryScreen");
 const finalScreen=document.getElementById("finalScreen");
+const mainContainer=document.getElementById("mainContainer");
 
 const gift=document.getElementById("gift");
 const nextQuest=document.getElementById("nextQuest");
 const yesBtn=document.getElementById("yes");
 const noBtn=document.getElementById("no");
 
-gift.addEventListener("click",()=>{
+/* Flow */
+
+gift.onclick=()=>{
   giftScreen.style.display="none";
   questScreen.style.display="block";
-});
+};
 
-nextQuest.addEventListener("click",()=>{
+nextQuest.onclick=()=>{
   const checks=document.querySelectorAll(".checklist input");
   let allChecked=true;
   checks.forEach(box=>{ if(!box.checked) allChecked=false; });
   if(!allChecked){ alert("Select all first 😏"); return; }
   questScreen.style.display="none";
   sorryScreen.style.display="block";
-});
+};
 
 function moveNo(){
   const x=Math.random()*240-120;
@@ -269,28 +274,27 @@ function moveNo(){
   noBtn.style.transform=`translate(${x}px,${y}px)`;
 }
 
-noBtn.addEventListener("mouseover",moveNo);
-noBtn.addEventListener("click",moveNo);
+noBtn.onmouseover=moveNo;
+noBtn.onclick=moveNo;
 
-yesBtn.addEventListener("click",()=>{
-  sorryScreen.style.display="none";
+yesBtn.onclick=()=>{
+  mainContainer.style.display="none";
   finalScreen.style.display="flex";
 
   const music=document.getElementById("rainMusic");
 
-  // PLAY SPECIFIC PART
-  music.currentTime = 70;   // 🔥 change start time here
+  // 🎵 CHANGE THESE TIMES
+  music.currentTime = 70;   // Start time (seconds)
   music.volume = 0;
   music.play();
 
-  // Stop at specific time
   music.addEventListener("timeupdate",()=>{
-    if(music.currentTime >= 100){   // 🔥 change end time here
+    if(music.currentTime >= 100){   // End time
       music.pause();
     }
   });
 
-  // Fade in volume
+  // Smooth volume fade
   let fade=setInterval(()=>{
     if(music.volume<0.9){
       music.volume+=0.05;
@@ -298,7 +302,7 @@ yesBtn.addEventListener("click",()=>{
       clearInterval(fade);
     }
   },200);
-});
+};
 
 </script>
 
