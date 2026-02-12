@@ -11,7 +11,7 @@
 body{
   margin:0;
   font-family:'Patrick Hand',cursive;
-  background:linear-gradient(135deg,#ffc1e3,#ffd6f2);
+  background:linear-gradient(135deg,#ffd1e8,#ffe6f5);
   display:flex;
   justify-content:center;
   align-items:center;
@@ -19,26 +19,13 @@ body{
   overflow:hidden;
 }
 
-/* Floating hearts */
-.emoji{
-  position:fixed;
-  font-size:22px;
-  animation:floatUp 6s linear infinite;
-  opacity:0.8;
-}
-
-@keyframes floatUp{
-  from{ transform:translateY(100vh); }
-  to{ transform:translateY(-10vh); }
-}
-
 .container{
   background:white;
   width:360px;
-  padding:30px;
-  border-radius:30px;
+  padding:32px;
+  border-radius:28px;
   text-align:center;
-  box-shadow:0 20px 60px rgba(255,0,150,0.2);
+  box-shadow:0 20px 50px rgba(255,0,150,0.15);
 }
 
 .screen{ display:none; }
@@ -46,122 +33,130 @@ body{
 
 h1{
   font-family:'Pacifico',cursive;
-  color:#ff1493;
+  color:#ff2e88;
 }
 
 button{
   padding:10px 24px;
   border:none;
   border-radius:25px;
-  margin:8px;
+  margin:10px;
   font-size:16px;
   cursor:pointer;
   transition:0.2s;
   font-family:'Patrick Hand',cursive;
 }
 
-.yes{
-  background:#ff1493;
+.primary{
+  background:#ff2e88;
   color:white;
 }
 
-.no{
-  background:#aaa;
+.secondary{
+  background:#ccc;
   color:white;
   position:relative;
 }
 
 button:hover{
-  transform:scale(1.08);
+  transform:scale(1.07);
 }
 
-/* FINAL SCREEN */
-
-.finalScreen{
+/* Fullscreen final */
+.full{
   position:fixed;
   top:0;
   left:0;
   width:100vw;
   height:100vh;
-  background:linear-gradient(135deg,#ff69b4,#ffb6e6);
+  background:linear-gradient(135deg,#ff69b4,#ffc6ec);
   display:none;
   justify-content:center;
   align-items:center;
   z-index:999;
+  flex-direction:column;
 }
 
-.glass{
-  background:rgba(255,255,255,0.3);
+.card{
+  background:rgba(255,255,255,0.35);
   backdrop-filter:blur(18px);
   padding:40px;
   border-radius:30px;
   text-align:center;
-  color:#8b005d;
+  color:#7a004d;
   width:300px;
 }
 
-.gif{
-  width:130px;
-  margin:15px 0;
+.emoji{
+  position:absolute;
+  font-size:22px;
+  animation:floatUp 6s linear infinite;
 }
 
-.message{
-  font-size:18px;
-  margin-top:10px;
+@keyframes floatUp{
+  from{ transform:translateY(100vh); }
+  to{ transform:translateY(-10vh); }
 }
 
-.signature{
-  margin-top:15px;
-  font-weight:600;
+.excited{
+  font-size:28px;
+  animation:pop 0.6s ease infinite alternate;
+}
+
+@keyframes pop{
+  from{ transform:scale(1); }
+  to{ transform:scale(1.1); }
 }
 
 </style>
 </head>
 <body>
 
-<!-- Floating Emojis -->
-<div class="emoji" style="left:10%;">💖</div>
-<div class="emoji" style="left:30%; animation-delay:2s;">💗</div>
-<div class="emoji" style="left:50%; animation-delay:4s;">💘</div>
-<div class="emoji" style="left:70%; animation-delay:1s;">💞</div>
-<div class="emoji" style="left:85%; animation-delay:3s;">💕</div>
-
 <div class="container">
 
+<!-- START -->
 <div id="startScreen" class="screen">
   <h1>Ritu Quest 💌</h1>
-  <p>I made something special for you…</p>
-  <button class="yes" onclick="goQuest()">See it</button>
+  <p>Ready for a tiny game?</p>
+  <button class="primary" onclick="goQuiz()">Start</button>
 </div>
 
-<div id="questScreen" class="screen">
-  <h1>Mini Quiz 😏</h1>
-  <p>Pick all correct answers:</p>
-  <label><input type="checkbox"> Ritu cutest</label><br>
-  <label><input type="checkbox"> Ritu dramatic</label><br>
-  <label><input type="checkbox"> Ritu sweet</label><br>
-  <label><input type="checkbox"> Ritu deserves apology</label><br><br>
-  <button class="yes" onclick="checkQuiz()">Continue</button>
+<!-- QUIZ -->
+<div id="quizScreen" class="screen">
+  <h1>Mini Round 😏</h1>
+  <p>Pick the true ones:</p>
+  <label><input type="checkbox"> You are the cutest</label><br>
+  <label><input type="checkbox"> You care deeply</label><br>
+  <label><input type="checkbox"> You act tough but are a softie</label><br>
+  <label><input type="checkbox"> You matter and deserve an apology</label><br><br>
+  <button class="primary" onclick="checkQuiz()">Continue</button>
 </div>
 
+<!-- FORGIVE -->
 <div id="forgiveScreen" class="screen">
   <h1>Forgive me? 🥺</h1>
-  <p>I promise next time no drama.</p>
-  <button class="yes" onclick="finalYes()">Yes</button>
-  <button class="no" id="noBtn">No</button>
+  <button class="primary" onclick="letsTalk()">Yes</button>
+  <button class="secondary" id="noBtn">No</button>
 </div>
 
 </div>
 
-<!-- FINAL -->
-<div id="finalScreen" class="finalScreen">
-  <div class="glass">
-    <img class="gif" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
-    <div class="message">
-      u fine u my fav 💗<br>
-      thanks cato 🐱
-    </div>
-    <div class="signature">— Vidhi</div>
+<!-- YIPPIE SCREEN -->
+<div id="yippieScreen" class="full">
+  <div class="excited">YIPPIEEEE 💗💗</div>
+  <button class="primary" onclick="finalPage()">Continue</button>
+</div>
+
+<!-- FINAL PAGE -->
+<div id="finalScreen" class="full">
+  <div class="card">
+    <h1>Let’s talk? 💞</h1>
+    <p>Not dramatic.<br>
+    Not complicated.<br>
+    Just real.</p>
+
+    <p style="margin-top:15px;">much love cato 🐱</p>
+    <p>— Vidhi</p>
   </div>
 </div>
 
@@ -169,9 +164,9 @@ button:hover{
 
 <script>
 
-function goQuest(){
+function goQuiz(){
   startScreen.style.display="none";
-  questScreen.style.display="block";
+  quizScreen.style.display="block";
 }
 
 function checkQuiz(){
@@ -179,10 +174,10 @@ function checkQuiz(){
   let all=true;
   checks.forEach(c=>{ if(!c.checked) all=false; });
   if(!all){
-    alert("Select all answers 😌");
+    alert("Select all 😌");
     return;
   }
-  questScreen.style.display="none";
+  quizScreen.style.display="none";
   forgiveScreen.style.display="block";
 }
 
@@ -194,14 +189,19 @@ noBtn.addEventListener("mouseover",()=>{
   noBtn.style.transform=`translate(${x}px,${y}px)`;
 });
 
-function finalYes(){
+function letsTalk(){
   document.querySelector(".container").style.display="none";
+  document.getElementById("yippieScreen").style.display="flex";
+}
+
+function finalPage(){
+  document.getElementById("yippieScreen").style.display="none";
   document.getElementById("finalScreen").style.display="flex";
 
   const music=document.getElementById("bgMusic");
 
-  music.currentTime=70;
-  music.volume=1;   // force volume
+  music.currentTime=70;  // start beat
+  music.volume=1;
   music.play();
 }
 
