@@ -1,209 +1,215 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>For Ritu 💗</title>
+<title>For You 💗</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
 <style>
-
 body{
   margin:0;
-  font-family:'Patrick Hand',cursive;
-  background:linear-gradient(135deg,#ffd1e8,#ffe6f5);
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#ffd1e8,#ff7eb3);
+  height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
   overflow:hidden;
 }
 
-.container{
-  background:white;
-  width:360px;
-  padding:32px;
-  border-radius:28px;
-  text-align:center;
-  box-shadow:0 20px 50px rgba(255,0,150,0.15);
-}
-
 .screen{ display:none; }
-#startScreen{ display:block; }
+
+.card{
+  background:white;
+  padding:40px;
+  border-radius:30px;
+  text-align:center;
+  width:330px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.15);
+}
 
 h1{
   font-family:'Pacifico',cursive;
-  color:#ff2e88;
+  color:#ff2e86;
+  margin-bottom:15px;
 }
 
+p{ margin:8px 0; }
+
 button{
-  padding:10px 24px;
+  padding:12px 28px;
   border:none;
-  border-radius:25px;
-  margin:10px;
+  border-radius:30px;
   font-size:16px;
   cursor:pointer;
-  transition:0.2s;
-  font-family:'Patrick Hand',cursive;
+  transition:0.3s;
 }
 
 .primary{
-  background:#ff2e88;
+  background:#ff2e86;
   color:white;
 }
 
+.primary:hover{
+  transform:scale(1.08);
+}
+
 .secondary{
-  background:#ccc;
+  background:#bbb;
   color:white;
   position:relative;
 }
 
-button:hover{
-  transform:scale(1.07);
+.checklist{
+  text-align:left;
+  margin:15px 0;
 }
 
-/* Fullscreen final */
-.full{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100vw;
-  height:100vh;
-  background:linear-gradient(135deg,#ff69b4,#ffc6ec);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:999;
-  flex-direction:column;
+.checklist label{
+  display:block;
+  margin:8px 0;
+  cursor:pointer;
 }
 
-.card{
-  background:rgba(255,255,255,0.35);
-  backdrop-filter:blur(18px);
-  padding:40px;
-  border-radius:30px;
-  text-align:center;
-  color:#7a004d;
-  width:300px;
-}
-
-.emoji{
-  position:absolute;
+.big-love{
   font-size:22px;
-  animation:floatUp 6s linear infinite;
+  color:#ff2e86;
+  font-weight:600;
+  margin:15px 0;
 }
 
-@keyframes floatUp{
-  from{ transform:translateY(100vh); }
-  to{ transform:translateY(-10vh); }
+.final-buttons{
+  margin-top:20px;
+  display:flex;
+  justify-content:center;
+  gap:20px;
 }
-
-.excited{
-  font-size:28px;
-  animation:pop 0.6s ease infinite alternate;
-}
-
-@keyframes pop{
-  from{ transform:scale(1); }
-  to{ transform:scale(1.1); }
-}
-
 </style>
 </head>
+
 <body>
 
-<div class="container">
-
-<!-- START -->
-<div id="startScreen" class="screen">
-  <h1>Ritu Quest 💌</h1>
-  <p>Ready for a tiny game?</p>
-  <button class="primary" onclick="goQuiz()">Start</button>
+<div id="giftScreen" class="screen" style="display:block;">
+  <div class="card">
+    <h1>Hey 🐱</h1>
+    <p>I made something for you.</p>
+    <button class="primary" onclick="goQuiz()">See it</button>
+  </div>
 </div>
 
-<!-- QUIZ -->
 <div id="quizScreen" class="screen">
-  <h1>Mini Round 😏</h1>
-  <p>Pick the true ones:</p>
-  <label><input type="checkbox"> You are the cutest</label><br>
-  <label><input type="checkbox"> You care deeply</label><br>
-  <label><input type="checkbox"> You act tough but are a softie</label><br>
-  <label><input type="checkbox"> You matter and deserve an apology</label><br><br>
-  <button class="primary" onclick="checkQuiz()">Continue</button>
+  <div class="card">
+    <h1>Mini Round 😏</h1>
+    <p>Pick the true ones:</p>
+    <div class="checklist">
+      <label><input type="checkbox"> U cute</label>
+      <label><input type="checkbox"> U dramatic but cute again</label>
+      <label><input type="checkbox"> Tough but soft</label>
+      <label><input type="checkbox"> You matter</label>
+      <label><input type="checkbox"> U deserve an apology</label>
+    </div>
+    <button class="primary" onclick="checkQuiz()">Continue</button>
+  </div>
 </div>
 
-<!-- FORGIVE -->
 <div id="forgiveScreen" class="screen">
-  <h1>Forgive me? 🥺</h1>
-  <button class="primary" onclick="letsTalk()">Yes</button>
-  <button class="secondary" id="noBtn">No</button>
+  <div class="card">
+    <h1>Forgive me? 🥺</h1>
+    <div class="final-buttons">
+      <button class="primary" onclick="goFinal()">Yes</button>
+      <button class="secondary" id="moveNo">No</button>
+    </div>
+  </div>
 </div>
 
-</div>
-
-<!-- YIPPIE SCREEN -->
-<div id="yippieScreen" class="full">
-  <div class="excited">YIPPIEEEE 💗💗</div>
-  <button class="primary" onclick="finalPage()">Continue</button>
-</div>
-
-<!-- FINAL PAGE -->
-<div id="finalScreen" class="full">
+<div id="finalScreen" class="screen">
   <div class="card">
     <h1>Let’s talk? 💞</h1>
-    <p>Not dramatic.<br>
-    Not complicated.<br>
-    Just real.</p>
+    <div class="final-buttons">
+      <button class="primary" id="bigYes">Yesss 💗</button>
+      <button class="secondary" id="bigNo">No</button>
+    </div>
+  </div>
+</div>
 
-    <p style="margin-top:15px;">much love cato 🐱</p>
+<div id="yesSlide" class="screen">
+  <div class="card">
+    <h1>🥹</h1>
+    <p class="big-love">much love cato 🐱💗</p>
+    <p>Thank you for choosing us.</p>
     <p>— Vidhi</p>
   </div>
 </div>
 
-<audio id="bgMusic" src="raindance.mp3"></audio>
+<div id="noSlide" class="screen">
+  <div class="card">
+    <h1>🥺</h1>
+    <p>If someday you feel like saying yes…</p>
+    <p>just text me "yes".</p>
+    <p>I’ll be here.</p>
+  </div>
+</div>
+
+<audio id="bgMusic" src="Dave-Ft-Tems-Raindance-(TrendyBeatz.com).mp3"></audio>
 
 <script>
 
 function goQuiz(){
-  startScreen.style.display="none";
+  giftScreen.style.display="none";
   quizScreen.style.display="block";
 }
 
 function checkQuiz(){
-  let checks=document.querySelectorAll("input[type='checkbox']");
+  const boxes=document.querySelectorAll("#quizScreen input");
   let all=true;
-  checks.forEach(c=>{ if(!c.checked) all=false; });
-  if(!all){
-    alert("Select all 😌");
-    return;
-  }
+  boxes.forEach(b=>{ if(!b.checked) all=false; });
+  if(!all){ alert("Select all 😏"); return; }
   quizScreen.style.display="none";
   forgiveScreen.style.display="block";
 }
 
-const noBtn=document.getElementById("noBtn");
+function goFinal(){
+  forgiveScreen.style.display="none";
+  finalScreen.style.display="block";
+}
 
-noBtn.addEventListener("mouseover",()=>{
-  const x=Math.random()*200-100;
-  const y=Math.random()*100-50;
-  noBtn.style.transform=`translate(${x}px,${y}px)`;
+const moveNo=document.getElementById("moveNo");
+moveNo.addEventListener("mouseover",()=>{
+  const x=Math.random()*150-75;
+  const y=Math.random()*60;
+  moveNo.style.transform=`translate(${x}px,${y}px)`;
 });
 
-function letsTalk(){
-  document.querySelector(".container").style.display="none";
-  document.getElementById("yippieScreen").style.display="flex";
-}
+const bigNo=document.getElementById("bigNo");
+bigNo.addEventListener("mouseover",()=>{
+  const x=Math.random()*150-75;
+  const y=Math.random()*60;
+  bigNo.style.transform=`translate(${x}px,${y}px)`;
+});
 
-function finalPage(){
-  document.getElementById("yippieScreen").style.display="none";
-  document.getElementById("finalScreen").style.display="flex";
+bigYes.onclick=()=>{
+  finalScreen.style.display="none";
+  yesSlide.style.display="block";
 
   const music=document.getElementById("bgMusic");
-
-  music.currentTime=70;  // start beat
-  music.volume=1;
+  music.currentTime=30;
+  music.volume=0;
   music.play();
-}
+
+  let fade=setInterval(()=>{
+    if(music.volume<0.8){
+      music.volume+=0.05;
+    }else{
+      clearInterval(fade);
+    }
+  },200);
+};
+
+bigNo.onclick=()=>{
+  finalScreen.style.display="none";
+  noSlide.style.display="block";
+};
 
 </script>
 
