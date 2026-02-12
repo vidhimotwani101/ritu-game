@@ -11,7 +11,7 @@
 body{
   margin:0;
   font-family:'Patrick Hand',cursive;
-  background:linear-gradient(135deg,#ffe0ec,#dbefff);
+  background:linear-gradient(135deg,#ffe6f0,#d6ecff);
   height:100vh;
   display:flex;
   justify-content:center;
@@ -19,115 +19,120 @@ body{
   overflow:hidden;
 }
 
-/* Container */
+/* Smooth fade animation */
+.screen{
+  display:none;
+  animation:fadeIn 0.6s ease forwards;
+}
 
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(15px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+#giftScreen{ display:block; }
+
+/* Main Card */
 .container{
   background:white;
-  padding:32px;
-  border-radius:26px;
-  width:340px;
+  padding:35px;
+  border-radius:30px;
+  width:350px;
   text-align:center;
-  box-shadow:0 20px 40px rgba(0,0,0,0.18);
+  box-shadow:0 25px 60px rgba(0,0,0,0.15);
   position:relative;
 }
 
-.screen{ display:none; }
-#giftScreen{ display:block; }
-
 /* Gift */
-
 #gift{
-  font-size:88px;
+  font-size:90px;
   cursor:pointer;
-  animation:bounce 1.5s infinite;
+  animation:float 2s ease-in-out infinite;
 }
 
-@keyframes bounce{
+@keyframes float{
   0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-12px);}
+  50%{transform:translateY(-15px);}
 }
 
 .open-text{
   margin-top:12px;
-  color:#555;
+  color:#777;
   font-size:15px;
 }
 
 /* Titles */
-
 h2{
   font-family:'Pacifico',cursive;
   color:#ff3b7d;
-  font-size:26px;
-  margin-bottom:10px;
-}
-
-p{
-  font-size:17px;
-  margin:8px 0;
-  line-height:1.4;
+  font-size:28px;
+  margin-bottom:12px;
 }
 
 /* Checklist */
-
 .checklist{
   text-align:left;
   margin:15px auto;
-  width:90%;
-  font-size:17px;
+  width:92%;
 }
 
 .checklist label{
   display:flex;
   align-items:center;
   gap:8px;
-  margin:6px 0;
+  margin:8px 0;
   cursor:pointer;
+  transition:0.2s;
+}
+
+.checklist label:hover{
+  transform:translateX(4px);
 }
 
 .checklist input{
   accent-color:#ff3b7d;
-  transform:scale(1.1);
-}
-
-#nextQuest{
-  margin-top:15px;
-  padding:8px 22px;
-  border:none;
-  border-radius:20px;
-  background:#ff3b7d;
-  color:white;
-  font-size:15px;
-  cursor:pointer;
+  transform:scale(1.15);
 }
 
 /* Buttons */
-
-.buttons{
-  margin-top:20px;
-  height:70px;
-  position:relative;
-}
-
 button{
-  padding:9px 24px;
+  padding:10px 26px;
   border:none;
-  border-radius:22px;
-  font-size:15px;
+  border-radius:25px;
+  font-size:16px;
   cursor:pointer;
   transition:0.2s;
   font-family:'Patrick Hand',cursive;
 }
 
-#yes{
+#nextQuest{
+  margin-top:18px;
   background:#ff3b7d;
   color:white;
 }
 
-#yes:hover{ transform:scale(1.05); }
+#nextQuest:hover{
+  transform:scale(1.05);
+}
+
+.buttons{
+  margin-top:20px;
+  height:80px;
+  position:relative;
+}
+
+#yes{
+  background:#ff3b7d;
+  color:white;
+  box-shadow:0 8px 20px rgba(255,59,125,0.4);
+}
+
+#yes:hover{
+  transform:scale(1.08);
+}
 
 #no{
-  background:#aaa;
+  background:#999;
   color:white;
   position:absolute;
 }
@@ -135,7 +140,7 @@ button{
 /* FINAL SCREEN */
 
 .rain-bg{
-  background:linear-gradient(135deg,#5c4f1a,#1f1b0f);
+  background:linear-gradient(135deg,#5c4f1a,#1a1608);
   display:flex;
   justify-content:center;
   align-items:center;
@@ -144,48 +149,36 @@ button{
   position:absolute;
   top:0;
   left:0;
-  animation:fadeInBg 1.5s ease forwards;
-}
-
-@keyframes fadeInBg{
-  from{opacity:0;}
-  to{opacity:1;}
 }
 
 .glass-card{
-  background:rgba(255,255,255,0.08);
-  backdrop-filter:blur(15px);
-  padding:35px;
-  border-radius:28px;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(18px);
+  padding:40px;
+  border-radius:30px;
   text-align:center;
   color:white;
-  box-shadow:0 20px 60px rgba(0,0,0,0.5);
-  animation:slideUp 1.2s ease forwards;
-}
-
-@keyframes slideUp{
-  from{transform:translateY(40px);opacity:0;}
-  to{transform:translateY(0);opacity:1;}
+  box-shadow:0 30px 70px rgba(0,0,0,0.6);
+  animation:fadeIn 1s ease forwards;
 }
 
 .final-title{
-  font-size:30px;
-  margin-bottom:12px;
+  font-size:32px;
   color:#f5e7a1;
 }
 
 .final-line{
   font-size:18px;
-  margin:10px 0;
+  margin:12px 0;
 }
 
 .small{
   font-size:15px;
-  opacity:0.85;
+  opacity:0.9;
 }
 
 .signature{
-  margin-top:20px;
+  margin-top:22px;
   font-weight:600;
   opacity:0.9;
 }
@@ -272,7 +265,7 @@ nextQuest.addEventListener("click",()=>{
 
 function moveNo(){
   const x=Math.random()*240-120;
-  const y=Math.random()*50;
+  const y=Math.random()*60;
   noBtn.style.transform=`translate(${x}px,${y}px)`;
 }
 
@@ -284,9 +277,20 @@ yesBtn.addEventListener("click",()=>{
   finalScreen.style.display="flex";
 
   const music=document.getElementById("rainMusic");
-  music.volume=0;
+
+  // PLAY SPECIFIC PART
+  music.currentTime = 70;   // 🔥 change start time here
+  music.volume = 0;
   music.play();
 
+  // Stop at specific time
+  music.addEventListener("timeupdate",()=>{
+    if(music.currentTime >= 100){   // 🔥 change end time here
+      music.pause();
+    }
+  });
+
+  // Fade in volume
   let fade=setInterval(()=>{
     if(music.volume<0.9){
       music.volume+=0.05;
